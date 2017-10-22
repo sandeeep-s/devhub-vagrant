@@ -65,7 +65,9 @@ Vagrant.configure("2") do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", path: "bootstrap.sh"
   config.vm.provision "docker" do |d|
-    d.run "jenkins/jenkins",
+    d.build_image "/vagrant/jenkins",
+      args: "-t devhub/jenkins"
+    d.run "devhub/jenkins",
       args: "-p 8080:8080"
   end
 
